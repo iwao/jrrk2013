@@ -1,0 +1,1276 @@
+@prefix schema: <http://schema.org/> .
+@prefix jrrk: <http://purl.org/jrrk#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix pc: <http://purl.org/procurement/public-contracts#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#> .
+
+jrrk:openingHours a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:CivicFacility ;
+	rdfs:label "開所時間"@ja .
+
+jrrk:numberOfAED a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:CivicFacility ;
+	rdfs:label "AEDの数"@ja .
+
+jrrk:jenre a rdf:Property ;
+	rdfs:range jrrk:Category ;
+	rdfs:domain jrrk:CivicFacility ;
+	rdfs:label "ジャンル"@ja .
+
+jrrk:hasWIFI a rdf:Property ;
+	rdfs:subPropertyOf jrrk:hasEquipment ;
+	rdfs:range jrrk:PublicWIFI ;
+	rdfs:domain jrrk:CivicFacility ;
+	rdfs:label "公衆無線LAN"@ja ;
+	rdfs:comment "公衆無線LANのリソースを指す" .
+
+jrrk:hasPlugs a rdf:Property ;
+	rdfs:subPropertyOf jrrk:hasEquipment ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:CivicFacility ;
+	rdfs:label "電源"@ja ;
+	rdfs:comment "利用できる電源の有無や数など" .
+
+jrrk:hasAED a rdf:Property ;
+	rdfs:subPropertyOf jrrk:hasEquipment ;
+	rdfs:range jrrk:AED ;
+	rdfs:domain jrrk:CivicFacility ;
+	rdfs:label "AED"@ja .
+
+jrrk:CivicFacility a rdfs:Class ;
+	rdfs:subClassOf schema:Place ;
+	rdfs:label "都市の施設"@ja .
+
+jrrk:category a rdf:Property ;
+	rdfs:range jrrk:Category ;
+	rdfs:label "カテゴリー"@ja .
+
+jrrk:address a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "住所"@ja .
+
+jrrk:EmergencyShelter a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "避難場所"@ja .
+
+jrrk:target a rdf:Property ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "対象"@ja ;
+	rdfs:comment "対象年齢や対象エリア等" .
+
+jrrk:categoryOfEvent a rdf:Property ;
+	rdfs:subPropertyOf jrrk:category ;
+	rdfs:range jrrk:Category ;
+	rdfs:domain jrrk:CivicEvent ;
+	rdfs:label "カテゴリー"@ja .
+
+jrrk:charge a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "料金について"@ja .
+
+jrrk:CivicEvent a rdfs:Class ;
+	rdfs:subClassOf schema:Place ;
+	rdfs:label "イベント"@ja .
+
+jrrk:hasSubEvent a rdf:Property ;
+	rdfs:subPropertyOf dcterms:hasPart ;
+	rdfs:range jrrk:CivicEvent ;
+	rdfs:domain jrrk:CivicEvent ;
+	rdfs:label "サブイベント"@ja .
+
+jrrk:location a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "開催場所について"@ja .
+
+jrrk:participant a rdf:Property ;
+	rdfs:range jrrk:Participant ;
+	rdfs:domain jrrk:CivicEvent ;
+	rdfs:label "クレジット"@ja ;
+	rdfs:comment "出演者や主催者や後援者等のリソースを指す" .
+
+jrrk:Participant a rdfs:Class ;
+	rdfs:label "クレジット"@ja .
+
+jrrk:programUnit a rdf:Property ;
+	rdfs:range jrrk:CivicEvent ;
+	rdfs:label "プログラム"@ja ;
+	rdfs:comment "イベントの詳細なプログラムについて" .
+
+jrrk:scheduleNote a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:CivicEvent ;
+	rdfs:label "イベントスケジュールについて"@ja .
+
+jrrk:access a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "アクセス"@ja .
+
+jrrk:areaOfPlot a rdf:Property ;
+	rdfs:range xsd:float ;
+	rdfs:label "敷地面積"@ja ;
+	rdfs:comment "単位は平行メートル" .
+
+jrrk:areaOfPremise a rdf:Property ;
+	rdfs:range xsd:float ;
+	rdfs:label "施設面積"@ja ;
+	rdfs:comment "単位は平行メートル" .
+
+jrrk:availableFor0 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "0歳児空き人数"@ja .
+
+jrrk:availableFor1 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "1歳児空き人数"@ja .
+
+jrrk:availableFor2 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "2歳児空き人数"@ja .
+
+jrrk:availableFor3 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "3歳児空き人数"@ja .
+
+jrrk:availableFor4 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "4歳児空き人数"@ja .
+
+jrrk:availableFor5 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "5歳児空き人数"@ja .
+
+jrrk:capacityFor0 a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "0歳児入所可能人数"@ja .
+
+jrrk:capacityFor1 a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "1歳児入所可能人数"@ja .
+
+jrrk:capacityFor2 a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "2歳児入所可能人数"@ja .
+
+jrrk:capacityFor3 a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "3歳児入所可能人数"@ja .
+
+jrrk:capacityFor4 a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "4歳児入所可能人数"@ja .
+
+jrrk:capacityFor5 a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "5歳児入所可能人数"@ja .
+
+jrrk:childrenCareService a rdf:Property ;
+	rdfs:subPropertyOf jrrk:hasService ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "提供サービス"@ja ;
+	rdfs:comment "園バスや給食、延長保育などのリソースを値にとる" .
+
+jrrk:closingDate a rdf:Property ;
+	rdfs:range xsd:date ;
+	rdfs:label "閉所日"@ja ;
+	rdfs:comment "営業を終了した施設を判断する目的で使用する" .
+
+jrrk:nearBy a rdf:Property ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "最寄りの駅やバス停"@ja .
+
+jrrk:numberOfPersonWaitingFor0 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "0歳児待ち人数"@ja .
+
+jrrk:numberOfPersonWaitingFor1 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "1歳児待ち人数"@ja .
+
+jrrk:numberOfPersonWaitingFor2 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "2歳児待ち人数"@ja .
+
+jrrk:numberOfPersonWaitingFor3 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "3歳児待ち人数"@ja .
+
+jrrk:numberOfPersonWaitingFor4 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "4歳児待ち人数"@ja .
+
+jrrk:numberOfPersonWaitingFor5 a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "5歳児待ち人数"@ja .
+
+jrrk:Nursery a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "保育所"@ja .
+
+jrrk:CivicPOI a rdfs:Class ;
+	rdfs:subClassOf schema:Place ;
+	rdfs:label "名所やランドマーク"@ja .
+
+jrrk:season a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:CivicPOI ;
+	rdfs:label "旬"@ja ;
+	rdfs:comment "訪れるのに適した季節などの情報を記述" .
+
+jrrk:certified a rdf:Property ;
+	rdfs:range jrrk:Certification ;
+	rdfs:label "認定"@ja ;
+	rdfs:comment "なにかに認定されている場合はその無いようについて記述" .
+
+jrrk:constructedBy a rdf:Property ;
+	rdfs:range foaf:Agent ;
+	rdfs:label "施工"@ja ;
+	rdfs:comment "施工者のリソースを指示" .
+
+jrrk:designedBy a rdf:Property ;
+	rdfs:range foaf:Agent ;
+	rdfs:label "デザイン"@ja ;
+	rdfs:comment "デザイナーのリソースを指示" .
+
+jrrk:HistoricalBuilding a rdfs:Class ;
+	rdfs:subClassOf jrrk:CulturalProperty ;
+	rdfs:label "歴史的建造物"@ja .
+
+jrrk:certificatedBy a rdf:Property ;
+	rdfs:range foaf:Agent ;
+	rdfs:domain jrrk:Certification ;
+	rdfs:label "認定者"@ja .
+
+jrrk:Certification a rdfs:Class ;
+	rdfs:label "認定"@ja ;
+	rdfs:comment "実績が認定されたその内容について記述" .
+
+jrrk:hasMedicalService a rdf:Property ;
+	rdfs:subPropertyOf jrrk:hasService ;
+	rdfs:range rdfs:Resource ;
+	rdfs:domain jrrk:MedicalInstitute ;
+	rdfs:label "診療科"@ja .
+
+jrrk:hasSickbed a rdf:Property ;
+	rdfs:range jrrk:SickBed ;
+	rdfs:label "病床"@ja .
+
+jrrk:MedicalInstitute a rdfs:Class ;
+	rdfs:subClassOf schema:MedicalOrganization ;
+	rdfs:label "医療機関"@ja .
+
+jrrk:avavailableBed a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:SickBed ;
+	rdfs:label "空き病床数"@ja .
+
+jrrk:SickBed a rdfs:Class ;
+	rdfs:subClassOf schema:Place ;
+	rdfs:label "病床"@ja .
+
+jrrk:sickBedCapacity a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:SickBed ;
+	rdfs:label "病床数"@ja .
+
+jrrk:MedicalService a rdfs:Class ;
+	rdfs:label "診療科"@ja .
+
+jrrk:MedicalSubjectClassification a rdfs:Class ;
+	rdfs:subClassOf jrrk:Classification ;
+	rdfs:label "診療科目"@ja .
+
+jrrk:Vaccintation a rdfs:Class ;
+	rdfs:label "予防接種"@ja .
+
+jrrk:FarmersMarket a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "農作物直売所"@ja .
+
+jrrk:availableNumber a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "空き台数"@ja .
+
+jrrk:capacity a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "キャパシティ"@ja .
+
+jrrk:CommunityCyclePort a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "コミュニティサイクルポート"@ja .
+
+jrrk:alliance a rdf:Property ;
+	rdfs:range jrrk:Alliance ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "提携サービス"@ja ;
+	rdfs:comment "駐車場の割引サービスなどの提供がある店舗等" .
+
+jrrk:canParked a rdf:Property ;
+	rdfs:range jrrk:TypeOfCar ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "駐車可能な車のタイプ"@ja .
+
+jrrk:hasBarrier-freeFacility a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "バリアフリー設備"@ja .
+
+jrrk:hasEntrance a rdf:Property ;
+	rdfs:subPropertyOf dcterms:hasPart ;
+	rdfs:range jrrk:Entrance ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "入り口"@ja .
+
+jrrk:heightLimit a rdf:Property ;
+	rdfs:range xsd:float ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "高さ制限"@ja .
+
+jrrk:lengthLimit a rdf:Property ;
+	rdfs:range xsd:float ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "長さ制限"@ja .
+
+jrrk:monthlyCharge a rdf:Property ;
+	rdfs:subPropertyOf schema:price ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "月極料金"@ja .
+
+jrrk:oneBoxVehiclesParkingCapacity a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "1BOX車両の駐車可能台数"@ja .
+
+jrrk:ParkingFacility a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "駐車場"@ja .
+
+jrrk:rvVehiclesParkingCapacity a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "RV車両の駐車可能台数"@ja .
+
+jrrk:threeNoVehiclesParkingCapacity a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "3ナンバー車両の駐車可能台数"@ja .
+
+jrrk:weightLimit a rdf:Property ;
+	rdfs:range xsd:float ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "重量制限"@ja .
+
+jrrk:widthLimit a rdf:Property ;
+	rdfs:range xsd:float ;
+	rdfs:domain jrrk:ParkingFacility ;
+	rdfs:label "幅制限"@ja .
+
+jrrk:Entrance a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "入り口"@ja .
+
+jrrk:rightAdmissionIsAllowed a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Entrance ;
+	rdfs:label "右折入庫可否"@ja .
+
+jrrk:Alliance a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "提携"@ja .
+
+jrrk:allianceWith a rdf:Property ;
+	rdfs:range rdfs:Resource ;
+	rdfs:domain jrrk:Alliance ;
+	rdfs:label "提携先"@ja .
+
+jrrk:conditions a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Alliance ;
+	rdfs:label "条件"@ja ;
+	rdfs:comment "買い物の購入金額などの情報" .
+
+jrrk:Equipment a rdfs:Class ;
+	rdfs:label "設備"@ja .
+
+jrrk:expiration a rdf:Property ;
+	rdfs:range xsd:date ;
+	rdfs:domain jrrk:Equipment ;
+	rdfs:label "有効期限"@ja .
+
+jrrk:modelNumber a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Equipment ;
+	rdfs:label "モデルナンバー"@ja .
+
+jrrk:serialNumber a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Equipment ;
+	rdfs:label "シリアルナンバー"@ja .
+
+jrrk:workingHours a rdf:Property ;
+	rdfs:subPropertyOf schema:openingHoursSpecification ;
+	rdfs:range schema:OpeningHoursSpecification ;
+	rdfs:domain jrrk:Equipment ;
+	rdfs:label "サービス時間"@ja .
+
+jrrk:AED a rdfs:Class ;
+	rdfs:subClassOf jrrk:Equipment ;
+	rdfs:label "AED"@ja ;
+	rdfs:comment "AEDを表すクラス" .
+
+jrrk:typeOfAED a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:AED ;
+	rdfs:label "AEDのタイプ"@ja .
+
+jrrk:typeOfPad a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:AED ;
+	rdfs:label "パッドのタイプ"@ja .
+
+jrrk:coverage a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:PublicWIFI ;
+	rdfs:label "カバーエリア"@ja .
+
+jrrk:PublicWIFI a rdfs:Class ;
+	rdfs:subClassOf jrrk:Equipment ;
+	rdfs:label "公衆無線LAN"@ja .
+
+jrrk:diameter a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Hydrant ;
+	rdfs:label "直径"@ja .
+
+jrrk:hasDecoupling a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Hydrant ;
+	rdfs:label "分離器"@ja ;
+	rdfs:comment "有、無" .
+
+jrrk:Hydrant a rdfs:Class ;
+	rdfs:subClassOf jrrk:Equipment ;
+	rdfs:label "消火栓"@ja .
+
+jrrk:barrier-freeToiletCapacity a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:PublicToilet ;
+	rdfs:label "バリアフリートイレ"@ja .
+
+jrrk:commonuseCapacity a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:PublicToilet ;
+	rdfs:label "男女共用トイレ"@ja .
+
+jrrk:hasBabybed a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:PublicToilet ;
+	rdfs:label "ベビーベッド"@ja ;
+	rdfs:comment "有／無" .
+
+jrrk:hasOstomate a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:PublicToilet ;
+	rdfs:label "オストメイト"@ja ;
+	rdfs:comment "有／無" .
+
+jrrk:manToiletCapacity a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:PublicToilet ;
+	rdfs:label "男性トイレ"@ja .
+
+jrrk:PublicToilet a rdfs:Class ;
+	rdfs:subClassOf jrrk:Equipment ;
+	rdfs:label "公衆トイレ"@ja .
+
+jrrk:womanToiletCapacity a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity ;
+	rdfs:range xsd:decimal ;
+	rdfs:domain jrrk:PublicToilet ;
+	rdfs:label "女性トレイ"@ja .
+
+jrrk:AdministrativeDocument a rdfs:Class ;
+	rdfs:subClassOf jrrk:AdministrativeInformation ;
+	rdfs:label "行政文書"@ja .
+
+jrrk:AdministrativeInformation a rdfs:Class ;
+	rdfs:subClassOf jrrk:AdministrativeInformation ;
+	rdfs:label "行政情報"@ja .
+
+jrrk:EmergencyInformation a rdfs:Class ;
+	rdfs:subClassOf jrrk:AdministrativeInformation ;
+	rdfs:label "緊急情報"@ja .
+
+jrrk:Whitepaper a rdfs:Class ;
+	rdfs:subClassOf jrrk:AdministrativeDocument ;
+	rdfs:label "白書"@ja .
+
+jrrk:Contract a rdfs:Class ;
+	rdfs:subClassOf pc:Contract ;
+	rdfs:label "調達情報"@ja .
+
+jrrk:RoadConstruction a rdfs:Class ;
+	rdfs:subClassOf jrrk:AdministrativeInformation ;
+	rdfs:label "道路工事情報"@ja .
+
+jrrk:classified a rdf:Property ;
+	rdfs:range jrrk:Classification ;
+	rdfs:label "分類"@ja .
+
+jrrk:PopulatonStatistics a rdfs:Class ;
+	rdfs:subClassOf jrrk:PopulatonStatistics ;
+	rdfs:label "人口統計"@ja .
+
+jrrk:Budget a rdfs:Class ;
+	rdfs:label "予算"@ja .
+
+jrrk:cofog a rdf:Property ;
+	rdfs:subClassOf jrrk:classified ;
+	rdfs:range jrrk:Classification ;
+	rdfs:label "政府機能分類(Classification of the Functions of Government)を表すリソースを指す"@ja .
+
+jrrk:Settlement a rdfs:Class ;
+	rdfs:label "決算"@ja .
+
+jrrk:CitizenProject a rdfs:Class ;
+	rdfs:label "市民主役事業"@ja .
+
+jrrk:hasRegularStaffOf a rdf:Property ;
+	rdfs:range xsd:integer ;
+	rdfs:label "専任スタッフ"@ja .
+
+jrrk:hasTemporaryStaffOf a rdf:Property ;
+	rdfs:range xsd:integer ;
+	rdfs:label "臨時スタッフ"@ja .
+
+jrrk:inCharge a rdf:Property ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "担当課"@ja .
+
+jrrk:man-hour a rdf:Property ;
+	rdfs:range xsd:integer ;
+	rdfs:label "スタッフ稼働時間"@ja .
+
+jrrk:proporsal a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "企画提案"@ja .
+
+jrrk:since a rdf:Property ;
+	rdfs:range xsd:date ;
+	rdfs:label "事業開始年度"@ja .
+
+jrrk:term a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "事業年数について"@ja .
+
+jrrk:Constituency a rdfs:Class ;
+	rdfs:label "選挙区"@ja .
+
+jrrk:constituency a rdf:Property ;
+	rdfs:range jrrk:Constituency ;
+	rdfs:label "選挙区"@ja .
+
+jrrk:elected a rdf:Property ;
+	rdfs:range xsd:integer ;
+	rdfs:label "当選回数"@ja .
+
+jrrk:Giin a rdfs:Class ;
+	rdfs:label "議員"@ja .
+
+jrrk:memberOfTheParty a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "所属政党（グループ）"@ja .
+
+jrrk:ClassificationOfRubbish a rdfs:Class ;
+	rdfs:subClassOf jrrk:Classification ;
+	rdfs:label "分別区分"@ja .
+
+jrrk:notes a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "備考"@ja .
+
+jrrk:Rubbish a rdfs:Class ;
+	rdfs:label "ゴミの種類"@ja .
+
+jrrk:departure a rdf:Property ;
+	rdfs:range jrrk:Depot ;
+	rdfs:label "出発地"@ja .
+
+jrrk:destination a rdf:Property ;
+	rdfs:range jrrk:Depot ;
+	rdfs:label "目的地"@ja .
+
+jrrk:Fare a rdfs:Class ;
+	rdfs:label "料金"@ja ;
+	rdfs:comment "料金についての詳細な情報を記述するためのリソース" .
+
+jrrk:fare a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "料金"@ja ;
+	rdfs:comment "金額" .
+
+jrrk:FareTable a rdfs:Class ;
+	rdfs:label "料金表"@ja .
+
+jrrk:fareUnit a rdf:Property ;
+	rdfs:range jrrk:Fare ;
+	rdfs:domain jrrk:FareTable ;
+	rdfs:label "料金"@ja .
+
+jrrk:forChildren a rdf:Property ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "子ども料金"@ja .
+
+jrrk:AirPort a rdfs:Class ;
+	rdfs:subClassOf jrrk:Depot ;
+	rdfs:label "空港"@ja .
+
+jrrk:BusStand a rdfs:Class ;
+	rdfs:subClassOf jrrk:Stand ;
+	rdfs:label "バス乗り場"@ja .
+
+jrrk:BusStop a rdfs:Class ;
+	rdfs:subClassOf jrrk:Depot ;
+	rdfs:label "バス停"@ja .
+
+jrrk:Depot a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "発着所"@ja .
+
+jrrk:Gate a rdfs:Class ;
+	rdfs:subClassOf jrrk:Stand ;
+	rdfs:label "ゲート"@ja ;
+	rdfs:comment "飛行機などの搭乗ゲートを表すクラス" .
+
+jrrk:hasBusStand a rdf:Property ;
+	rdfs:subPropertyOf jrrk:hasStand ;
+	rdfs:range jrrk:Stand ;
+	rdfs:domain jrrk:Depot ;
+	rdfs:label "バス乗り場"@ja .
+
+jrrk:hasGate a rdf:Property ;
+	rdfs:subPropertyOf jrrk:hasStand ;
+	rdfs:range jrrk:Stand ;
+	rdfs:domain jrrk:Depot ;
+	rdfs:label "ゲート"@ja .
+
+jrrk:hasPier a rdf:Property ;
+	rdfs:subPropertyOf jrrk:hasStand ;
+	rdfs:range jrrk:Stand ;
+	rdfs:domain jrrk:Depot ;
+	rdfs:label "港"@ja .
+
+jrrk:hasPlatForm a rdf:Property ;
+	rdfs:subPropertyOf jrrk:hasStand ;
+	rdfs:range jrrk:Stand ;
+	rdfs:domain jrrk:Depot ;
+	rdfs:label "ホーム"@ja .
+
+jrrk:hasRoute a rdf:Property ;
+	rdfs:range jrrk:BusRoute ;
+	rdfs:label "この発着所を経由する路線"@ja .
+
+jrrk:hasStand a rdf:Property ;
+	rdfs:subPropertyOf dcterms:hasPart ;
+	rdfs:range jrrk:Stand ;
+	rdfs:domain jrrk:Depot ;
+	rdfs:label "乗り場"@ja .
+
+jrrk:hasTimetableSet a rdf:Property ;
+	rdfs:range jrrk:TimetableSet ;
+	rdfs:label "この発着所の時刻表"@ja .
+
+jrrk:Pier a rdfs:Class ;
+	rdfs:subClassOf jrrk:Stand ;
+	rdfs:label "桟橋"@ja .
+
+jrrk:PlatForm a rdfs:Class ;
+	rdfs:subClassOf jrrk:Stand ;
+	rdfs:label "ホーム"@ja .
+
+jrrk:Port a rdfs:Class ;
+	rdfs:subClassOf jrrk:Depot ;
+	rdfs:label "港"@ja .
+
+jrrk:Stand a rdfs:Class ;
+	rdfs:subClassOf jrrk:Depot ;
+	rdfs:label "乗り場"@ja .
+
+jrrk:Station a rdfs:Class ;
+	rdfs:subClassOf jrrk:Depot ;
+	rdfs:label "駅"@ja .
+
+jrrk:arrival a rdf:Property ;
+	rdfs:range jrrk:Arrival ;
+	rdfs:label "到着"@ja .
+
+jrrk:Arrival a rdfs:Class ;
+	rdfs:label "到着"@ja .
+
+jrrk:arriveAt a rdf:Property ;
+	rdfs:range jrrk:Depot ;
+	rdfs:label "到着場所"@ja .
+
+jrrk:BusService a rdfs:Class ;
+	rdfs:subClassOf jrrk:Service ;
+	rdfs:label "バスの運行"@ja .
+
+jrrk:Flight a rdfs:Class ;
+	rdfs:subClassOf jrrk:Service ;
+	rdfs:label "フライト"@ja .
+
+jrrk:hasService a rdf:Property ;
+	rdfs:range jrrk:Service ;
+	rdfs:label "提供しているサービス"@ja .
+
+jrrk:hasTimetable a rdf:Property ;
+	rdfs:range jrrk:Timetable ;
+	rdfs:label "時刻表詳細"@ja ;
+	rdfs:comment "時刻表リソースを指す" .
+
+jrrk:Operation a rdfs:Class ;
+	rdfs:subClassOf jrrk:Service ;
+	rdfs:label "船等の運航"@ja .
+
+jrrk:route a rdf:Property ;
+	rdfs:range jrrk:Route ;
+	rdfs:label "路線"@ja .
+
+jrrk:Service a rdfs:Class ;
+	rdfs:label "サービス"@ja ;
+	rdfs:comment "店舗や公共施設によるサービス" .
+
+jrrk:targetDay a rdf:Property ;
+	rdfs:subPropertyOf jrrk:target ;
+	rdfs:range schema:DayOfWeek ;
+	rdfs:label "対象日"@ja .
+
+jrrk:targetDayFrom a rdf:Property ;
+	rdfs:subPropertyOf jrrk:target ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "対象日（開始）"@ja .
+
+jrrk:targetDayTo a rdf:Property ;
+	rdfs:subPropertyOf jrrk:target ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "対象日（終了）"@ja .
+
+jrrk:time a rdf:Property ;
+	rdfs:range xsd:dateTime ;
+	rdfs:label "時刻"@ja .
+
+jrrk:Timetable a rdfs:Class ;
+	rdfs:label "時刻表詳細"@ja ;
+	rdfs:comment "時刻表を表すクラス" .
+
+jrrk:TimetableAtBusStop a rdfs:Class ;
+	rdfs:subClassOf jrrk:Timetable ;
+	rdfs:label "バスの時刻表詳細"@ja .
+
+jrrk:TimetableSet a rdfs:Class ;
+	rdfs:label "時刻表"@ja .
+
+jrrk:BusRoute a rdfs:Class ;
+	rdfs:subClassOf jrrk:Route ;
+	rdfs:label "バス路線"@ja .
+
+jrrk:hasSubRoute a rdf:Property ;
+	rdfs:range jrrk:Route ;
+	rdfs:label "この路線に対する従たる路線"@ja .
+
+jrrk:named a rdf:Property ;
+	rdfs:range jrrk:Depot ;
+	rdfs:label "発着所"@ja .
+
+jrrk:order a rdf:Property ;
+	rdfs:range xsd:integer ;
+	rdfs:label "順序"@ja .
+
+jrrk:Route a rdfs:Class ;
+	rdfs:label "路線"@ja .
+
+jrrk:subRouteOf a rdf:Property ;
+	rdfs:range jrrk:Route ;
+	rdfs:label "この路線に対する主たる路線"@ja .
+
+jrrk:timeTable a rdf:Property ;
+	rdfs:range jrrk:Timetable ;
+	rdfs:label "ダイアグラム"@ja .
+
+jrrk:via a rdf:Property ;
+	rdfs:range jrrk:Via ;
+	rdfs:label "経由"@ja .
+
+jrrk:Via a rdfs:Class ;
+	rdfs:label "経由"@ja .
+
+jrrk:ProbeInformation a rdfs:Class ;
+	rdfs:label "現在地"@ja .
+
+jrrk:onService a rdf:Property ;
+	rdfs:range jrrk:Service ;
+	rdfs:label "路線"@ja .
+
+jrrk:advancePayment a rdf:Property ;
+	rdfs:subPropertyOf jrrk:termsOfPayment ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "前払いについて"@ja .
+
+jrrk:blueprint a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "設計書"@ja .
+
+jrrk:contractDate a rdf:Property ;
+	rdfs:range xsd:dateTime ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "契約日"@ja .
+
+jrrk:contractDeposit a rdf:Property ;
+	rdfs:subPropertyOf jrrk:termsOfPayment ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "契約保証金について"@ja .
+
+jrrk:disclosed a rdf:Property ;
+	rdfs:range xsd:dateTime ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "開示日"@ja .
+
+jrrk:documentToBeSubmitted a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "提出書類"@ja .
+
+jrrk:engineer a rdf:Property ;
+	rdfs:subPropertyOf jrrk:eligibilityForParticipation ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "技術者内容"@ja .
+
+jrrk:grade a rdf:Property ;
+	rdfs:subPropertyOf jrrk:eligibilityForParticipation ;
+	rdfs:range jrrk:Classification ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "格付け分類"@ja .
+
+jrrk:industrialSpecies a rdf:Property ;
+	rdfs:subPropertyOf jrrk:eligibilityForParticipation ;
+	rdfs:range jrrk:Classification ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "産業分類"@ja .
+
+jrrk:industrialSpeciesSpecific a rdf:Property ;
+	rdfs:subPropertyOf jrrk:eligibilityForParticipation ;
+	rdfs:range jrrk:Classification ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "産業細分類"@ja .
+
+jrrk:locationClassification a rdf:Property ;
+	rdfs:subPropertyOf jrrk:eligibilityForParticipation ;
+	rdfs:range jrrk:Classification ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "エリア分類"@ja .
+
+jrrk:lowestLimitPrice a rdf:Property ;
+	rdfs:range xsd:integer ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "最低価格"@ja .
+
+jrrk:mandatory a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "必須事項について"@ja .
+
+jrrk:notices a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "特記事項"@ja .
+
+jrrk:partialPayment a rdf:Property ;
+	rdfs:subPropertyOf jrrk:termsOfPayment ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "部分払いについて"@ja .
+
+jrrk:referencePrice a rdf:Property ;
+	rdfs:range xsd:integer ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "参考価格"@ja .
+
+jrrk:result a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "入札結果"@ja .
+
+jrrk:workPeriod a rdf:Property ;
+	rdfs:range xsd:dateTime ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "事業期間"@ja .
+
+jrrk:biddingEligibility a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:domain jrrk:Contract ;
+	rdfs:label "入札参加資格"@ja .
+
+jrrk:Animal a rdfs:Class ;
+	rdfs:label "動物"@ja .
+
+jrrk:distributed a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "分布"@ja .
+
+jrrk:Exhibition a rdfs:Class ;
+	rdfs:subClassOf schema:Place ;
+	rdfs:label "展示場所"@ja .
+
+jrrk:length a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "体長"@ja .
+
+jrrk:Species a rdfs:Class ;
+	rdfs:label "種"@ja .
+
+jrrk:weight a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "体重"@ja .
+
+jrrk:DayOfWeek a rdfs:Class ;
+	rdfs:subClassOf schema:DayOfWeek, skos:Concept ;
+	rdfs:comment "曜日を表すクラス"@ja ;
+	rdfs:label "日"@ja .
+
+jrrk:ArrivalTime a rdfs:Class ;
+	rdfs:label "到着時刻"@ja ;
+	rdfs:comment "到着時刻を表すクラス" .
+
+jrrk:arrivalTime a rdf:Property ;
+	rdfs:range jrrk:ArrivalTime ;
+	rdfs:label "到着時刻"@ja .
+
+jrrk:biddingEligibility rdfs:label "参加資格"@ja .
+
+jrrk:Category a rdfs:Class ;
+	rdfs:label "カテゴリー"@ja ;
+	rdfs:comment "さまざまなオブジェクトのカテゴリを表すクラス" .
+
+jrrk:ClassifiedOfExpenses a rdfs:Class ;
+	rdfs:subClassOf jrrk:Classification ;
+	rdfs:label "費目分類項目"@ja .
+
+jrrk:contact a rdf:Property ;
+	rdfs:subPropertyOf schema:contactPoint ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "問い合わせ先"@ja .
+
+jrrk:CulturalProperty a rdfs:Class ;
+	rdfs:label "文化財"@ja ;
+	rdfs:comment "文化財を表すクラス" ;
+	rdfs:subPropertyOf schema:Plce, jrrk:CivicPOI . 
+
+jrrk:Dentist a rdfs:Class ;
+	rdfs:subClassOf jrrk:MedicalInstitute ;
+	rdfs:label "歯科"@ja ;
+	rdfs:comment "歯科を表すクラス" .
+
+jrrk:Department a rdfs:Class ;
+	rdfs:label "部課"@ja ;
+	rdfs:comment "組織内の局や課を表すクラス" .
+
+jrrk:departmentInCharge a rdf:Property ;
+	rdfs:range jrrk:Department ;
+	rdfs:label "担当課"@ja .
+
+jrrk:eligibilityForParticipation a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "参加資格"@ja .
+
+jrrk:EmergencyFacility a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "緊急時施設"@ja ;
+	rdfs:comment "緊急時施設を表すクラス" .
+
+jrrk:HistoricalDocument a rdfs:Class ;
+	rdfs:label "歴史的資料"@ja .
+
+jrrk:Hospital a rdfs:Class ;
+	rdfs:subClassOf jrrk:MedicalInstitute ;
+	rdfs:label "病院"@ja ;
+	rdfs:comment "病院を表すクラス" .
+
+jrrk:livein a rdf:Property ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "居住エリア"@ja .
+
+jrrk:LocalBrandAmabssodor a rdfs:Class ;
+	rdfs:label "地域ブランド大使"@ja ;
+	rdfs:comment "地域ブランド大使を表すクラス" .
+
+jrrk:MedicalClinic a rdfs:Class ;
+	rdfs:subClassOf jrrk:MedicalInstitute ;
+	rdfs:label "医院"@ja ;
+	rdfs:comment "医院を表すクラス" .
+
+jrrk:MedicalSpeciality a rdfs:Class ;
+	rdfs:subClassOf schema:MedicalSpeciality ;
+	rdfs:label "診療科目分類"@ja ;
+	rdfs:comment "診療科目分類を表すクラス" .
+
+jrrk:RequiringAssistanceAuthorizedUsersFacilityDisaster a rdfs:Class ;
+	rdfs:subClassOf jrrk:EmergencyFacility ;
+	rdfs:label "災害時要援護者利用施設"@ja ;
+	rdfs:comment "災害時要援護者利用施設を表すクラス" .
+
+jrrk:role a rdf:Property ;
+	rdfs:subPropertyOf jrrk:classified ;
+	rdfs:range jrrk:Classification ;
+	rdfs:label "役割や担当"@ja ;
+	rdfs:comment "主催や後援など" .
+
+jrrk:Statistics a rdfs:Class ;
+	rdfs:label "統計"@ja .
+
+jrrk:TemporaryGatheringLocation a rdfs:Class ;
+	rdfs:subClassOf jrrk:EmergencyFacility ;
+	rdfs:label "一時避難場所"@ja ;
+	rdfs:comment "一時避難場所を表すクラス" .
+
+jrrk:termsOfPayment a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "支払い条件"@ja .
+
+jrrk:representative a rdf:Property ;
+	rdfs:label "管理者"@ja .
+
+jrrk:Classification a rdfs:Class ;
+	rdfs:subClassOf skos:Concept ;
+	rdfs:label "分類"@ja ;
+	rdfs:comment "さまざまなオブジェクトの分類を表すクラス" .
+
+jrrk:notesAboutTarget a rdf:Property ;
+	rdfs:subPropertyOf jrrk:notes ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "対象に関する記述"@ja ;
+	rdfs:comment "対象年齢や対象エリアなどに関する記述" .
+
+jrrk:status a rdf:Property ;
+	rdfs:label "状態"@ja ;
+	rdfs:comment "さまざまなオブジェクトの状態" .
+
+jrrk:direction a rdf:Property ;
+	rdfs:range xsd:float ;
+	rdfs:label "方位（度）"@ja .
+
+jrrk:speed a rdf:Property ;
+	rdfs:range xsd:float ;
+	rdfs:label "速度（m/秒）"@ja .
+
+jrrk:isDataAbout a rdf:Property ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "データの主題を示す"@ja .
+
+jrrk:LocalBusiness a rdfs:Class ;
+	rdfs:subClassOf jrrk:CivicFacility ;
+	rdfs:label "商業施設"@ja .
+
+jrrk:capacityNote a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "定員等"@ja ;
+	rdfs:comment "施設の定員やイベントの募集人数等についての説明" .
+
+jrrk:selectionMethod a rdf:Property ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "選考方法"@ja ;
+	rdfs:comment "募集等に対する選考法" .
+
+jrrk:number a rdf:Property ;
+	rdfs:range xsd:integer ;
+	rdfs:label "数"@ja .
+
+jrrk:price a rdf:Property ;
+	rdfs:subPropertyOf schema:price ;
+	rdfs:range rdfs:Literal ;
+	rdfs:label "料金"@ja .
+	
+jrrk:GeriatricHealthServicesFacility a rdfs:Class ;
+	rdfs:SubClassOf jrrk:CivicFacility ;
+	rdfs:label "介護老人保健施設"@ja .
+	
+jrrk:capacityForCognitiveImpairment a rdf:Property ;
+	rdfs:subPropertyOf jrrk:capacity;
+	rdfs:label "認知症定員"@ja .
+	
+# -- qb dimensions and measures  ----------------------------
+
+jrrk:refAge a rdf:Property, qb:DimensionProperty ;
+	rdfs:range xsd:decimal ;
+	rdfs:label "年齢"@ja .
+
+jrrk:refArea a rdf:Property, qb:DimensionProperty ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "対象地域"@ja .
+
+jrrk:refSex a rdf:Property, qb:DimensionProperty ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "性別"@ja .
+
+jrrk:refYear a rdf:Property, qb:DimensionProperty ;
+	rdfs:range xsd:date ;
+	rdfs:label "年"@ja .
+	
+jrrk:refPeriod a rdf:Property, qb:DimensionProperty ;
+	rdfs:range rdfs:Resource ;
+	rdfs:label "年次"@ja .
+
+jrrk:amount a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:integer ;
+	rdfs:label "金額"@ja .
+
+jrrk:avarageHumidity a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:float ;
+	rdfs:label "平均湿度"@ja .
+
+jrrk:avarageTemp a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:float ;
+	rdfs:label "平均気温"@ja .
+
+jrrk:ClimateStatistics a rdfs:Class ;
+	rdfs:label "気象統計"@ja .
+
+jrrk:highestSnowfallPerDay a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:float ;
+	rdfs:label "一日の最大降雪量"@ja .
+
+jrrk:highestTemp a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:float ;
+	rdfs:label "最高気温"@ja .
+
+jrrk:lowestTemp a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:float ;
+	rdfs:label "最低気温"@ja .
+
+jrrk:precipitation a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:float ;
+	rdfs:label "降雨量"@ja .
+
+jrrk:snowfallInTotal a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:float ;
+	rdfs:label "降雪量"@ja .
+
+jrrk:budjet a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:integer ;
+	rdfs:label "予算"@ja .
+
+jrrk:numberOfHousehold a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:decimal ;
+	rdfs:label "世帯数"@ja .
+
+jrrk:numberOfPeople a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:decimal ;
+	rdfs:label "人口"@ja .
+
+jrrk:populationGrowthByNaturalFactors a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:decimal ;
+	rdfs:label "自然要因による人口増加"@ja .
+
+jrrk:populationGrowthBySocialFactors a rdf:Property, qb:MeasureProperty;
+	rdfs:range xsd:decimal ;
+	rdfs:label "社会的要因による人口増加"@ja .
+
+jrrk:numberOfBirth  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "出生数"@ja;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer ;
+    .
+    
+jrrk:numberOfDeaths  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "死亡数"@ja;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer ;
+    .
+    
+jrrk:populationIncreaseAndDecreaseByNaturalFactors  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "自然増減"@ja;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer ;
+    .
+    
+jrrk:movingIn  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "転入"@ja;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer ;
+    .
+    
+jrrk:movingOut  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "転出"@ja;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer ;
+    .
+    
+jrrk:populationIncreaseAndDecreaseBySocialFactors  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "社会増減"@ja;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer ;
+    .
+
+jrrk:FinancingFacilityForWorkers a rdfs:Class　;
+	rdfs:label "勤労者貸付制度"@ja.
+
+jrrk:repaymentPeriod a rdf:Property　;
+	rdfs:label "返済期間"@ja;
+	rdfs:range rdfs:Literal ;
+    .
+
+
+jrrk:repaymentMethod a rdf:Property
+	rdfs:label "返済方法"@ja;
+	rdfs:range rdfs:Literal　;
+    .
+
+jrrk:necessaryDocument a rdf:Property
+	rdfs:label "必要書類等"@ja;
+	rdfs:range rdfs:Literal ;
+    .
+
+jrrk:purposeForFunds a rdf:Property
+	rdfs:label "資金使途"@ja;
+	rdfs:range rdfs:Literal ;
+    .
+
+jrrk:interestRates a rdf:Property
+	rdfs:label "金利"@ja;
+	rdfs:range rdfs:Literal ;
+    .
+
+jrrk:amountLimit a rdf:Property
+	rdfs:label "貸付上限額"@ja;
+	rdfs:range rdfs:Literal ;
+    .
+
+jrrk:financialInstitution a rdf:Property
+	rdfs:label "取り扱い金融機関"@ja;
+	rdfs:range rdfs:Literal ;
+    .
