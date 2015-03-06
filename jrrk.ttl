@@ -22,7 +22,7 @@ jrrk:numberOfAED a rdf:Property ;
 	rdfs:domain jrrk:CivicFacility ;
 	rdfs:label "AEDの数"@ja .
 
-jrrk:jenre a rdf:Property ;
+jrrk:genre a rdf:Property ;
 	rdfs:range jrrk:Category ;
 	rdfs:domain jrrk:CivicFacility ;
 	rdfs:label "ジャンル"@ja .
